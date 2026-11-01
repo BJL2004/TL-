@@ -1,0 +1,24 @@
+safe_arm_node:
+  ros__parameters:
+    enabled_on_start: false
+    state_timeout_sec: 0.5
+    max_joint_step_deg: 20.0
+    max_cartesian_step_mm: 80.0
+    max_orientation_step_rad: 0.35
+    max_velocity: 20.0
+    max_acceleration: 20.0
+    max_deceleration: 20.0
+    max_servoj_step_deg: 1.0
+    joint_min_deg: [-170.0, -130.0, -150.0, -180.0, -130.0, -360.0]
+    joint_max_deg: [170.0, 130.0, 150.0, 180.0, 130.0, 360.0]
+    workspace_min_mm: [-650.0, -650.0, 60.0]
+    workspace_max_mm: [650.0, 650.0, 850.0]
+    safe_movej_topic: "/tl_safe/moveJ"
+    safe_movel_topic: "/tl_safe/moveL"
+    safe_servoj_topic: "/tl_safe/servoj_pos"
+    driver_movej_topic: "/tl_driver/moveJ"
+    driver_movel_topic: "/tl_driver/moveL"
+    driver_servoj_topic: "/tl_driver/set_servoj_pos"
+    joint_state_topic: "/joint_states"
+    tcp_pose_topic: "/tcp_pose"
+    arm_status_topic: "/arm_status"

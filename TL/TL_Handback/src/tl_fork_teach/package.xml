@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>tl_fork_teach</name>
+  <version>0.1.0</version>
+  <description>Standalone U-fork basket teaching tool for TL TCB605.</description>
+  <maintainer email="nvidia@localhost">nvidia</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+  <exec_depend>tl_ros2_interface</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>python3-scipy</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

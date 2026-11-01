@@ -1,0 +1,68 @@
+control_node:
+  ros__parameters:
+    robot_ip: "192.168.1.13"
+    robot_port: "6001"
+    camera_object_topic: "/tl_vision/object_3d_pos_camera"
+    base_frame_id: "base_link"
+    object_type: "block"
+    grasp_offset: 0.40   # m
+    grasp_depth: 0.05    # m
+    approach_movetype: "MOVJ"
+    # ── ModbusRTU 参数（灵巧手 ROH-LiteS001）──
+    modbus_master_id: 1
+    modbus_rtu_port: 2
+    modbus_rtu_baudrate: 115200
+    modbus_rtu_slave_id: 2
+    modbus_rtu_data_bit: 8
+    modbus_rtu_stop_bit: 1
+    modbus_rtu_check_bit: "None"
+    # POS_TARGET 寄存器 1135-1140 (6指)
+    modbus_gripper_addrs: [1135,1136,1137,1138,1139,1140]
+    modbus_gripper_close_val: [21000,20000,23000,60000,60000,60000]
+    modbus_gripper_open_val: [0,0,0,60000,60000,60000]
+    # Z 轴最低位置限制（mm，防止碰撞）
+    z_min_limit: 30.0
+    # 抓取目标 Z（mm，按 h 后下降到的位置）
+    grasp_target_z: 160.0
+    # 抓取过渡 Z（mm），先降到这个高度再降到 grasp_target_z
+    grasp_approach_z: 200.0
+    # 工具坐标系参数（夹爪抓取点相对于法兰盘的偏移）
+    tool_num: 1
+    tool_user_num: 0
+    tool_x: -30.0
+    tool_y: 20.0
+    tool_z: 130.0
+    # 下降时 Y 方向手动补偿（mm，因姿态变化导致夹爪偏移）
+    descend_y_offset: 33.0
+    # 第6轴角度补偿
+    angle_scale: 1.0
+    angle_offset: 0.0
+    # ServoJ 参数
+    servoj_interp_points: 500
+    servoj_arrival_threshold: 0.5
+    servoj_vmax: [10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
+    servoj_amax: [3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0]
+    servoj_jmax: [50000.0, 50000.0, 50000.0, 50000.0, 50000.0, 50000.0, 50000.0]
+    zero_joint: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    handeye_matrix:
+      # ARM Jetson 标定: daniilidis/intrinsic_xyz, 23样本, RMS=9.87mm/0.91°
+      [
+        -0.0069293095, -0.9999440715,  0.0079899085,  0.0939027919,
+         0.9996176779, -0.0067127277,  0.0268223296, -0.0313651033,
+        -0.0267671954,  0.0081727140,  0.9996082853, -0.0125169900,
+         0.0,           0.0,           0.0,           1.0
+      ]
+    # 自动循环模式
+    auto_loop_enabled: true
+    # 抓取时间参数（秒）
+    gripper_open_delay: 0.5
+    gripper_close_delay: 4.0
+    pre_waypoint_delay: 1.0
+    post_waypoint_delay: 4.0
+    # 抓取后依次到达的笛卡尔点位（xyz mm + rpy rad）
+    after_grasp_waypoints: [
+      507.9, -20.5, 245.6, 3.12, 0.9, 0.0,
+      442.9, 248.5, 245.6, -2.6, 0.6, -0.7,
+      366.2, 244.7, 152.6, -2.6, 0.6, -0.7,
+      366.2, 244.7, 180.6, -2.6, 0.6, -0.7
+    ]
