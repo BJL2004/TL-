@@ -1,0 +1,4 @@
+# Prefer Ubuntu/ROS packages already installed on Jetson.
+# Do not replace the Jetson vendor PyTorch or NumPy stack with this file.
+PyYAML>=6.0
+paho-mqtt>=2.0
