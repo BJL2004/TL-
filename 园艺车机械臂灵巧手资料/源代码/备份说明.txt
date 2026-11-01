@@ -1,0 +1,42 @@
+========================================
+源代码备份说明
+备份日期：2026-10-08（完整性核对版）
+========================================
+
+本文件夹是 TL 机械臂系统（Jetson Nano × TCB605 机械臂 × D435 相机 × ROH 灵巧手 × MQTT）
+的全部程序源代码备份，共三套，均为 2026-10-08 最新版，已逐一核对文件数与关键文件内容：
+
+1) TL_lowerobs_test\  —— 【当前推荐使用】新版验证包（49 个文件）
+   - scripts\   4 个启动脚本（teach_seed / teach_fork / run_seed_mqtt / run_fork_mqtt）
+                + 查点工具 list_taught
+   - src\       三个程序包源码：tl_hand（种子运行）、tl_hand_deploy（种子示教）、
+                tl_fork_teach（叉子示教 + 叉子运行）
+   - 含全部最新功能：下排观测位（A/B 分侧）、叉子待机位 = 种球默认位、
+     trim_pick 失败自动回待机位、下排 W/T 独立槽位、
+     A3 排码贴反修正（--reversed-rows A3）、B 侧下排观测位自动 = A 侧 +180°
+   - 操作说明.md / 操作说明.docx：新版功能说明（V5）
+
+2) TL\  —— 稳定版总装（老版）
+   - TL_Handback\  运行 / 示教程序（tl_hand、tl_fork_teach）
+   - TL_Dobot\     标定 / 示教程序（tl_hand_deploy；**手眼标定全套**：
+                   采集/求解/验证脚本 run_handeye_collect|calibrate|validate.sh、
+                   handeye_calibrate.py、handeye_collect_node.py、handeye_accuracy.py、
+                   handeye_validate_report.py、convert_handeye_frame.py、
+                   config/handeye.yaml、launch/handeye_collect.launch.py 等）
+   - scripts\      一键脚本（run_driver.sh、teach_*.sh、run_*.sh 等）
+   - aruco\        ArUco 码文件（ID 0~191）
+   - 文档\         历史文档（含最新《机械臂系统_小白快速上手手册 V8》md + docx）
+
+3) tl_robot_ros2_py-arm\  —— 机械臂驱动（ROS2 驱动包源码，707 个文件）
+   - 驱动终端 run_driver.sh 启动的就是它；改驱动后才需要 colcon build
+
+【未包含】
+- .git 版本历史、build / install / log / __pycache__ 等编译缓存；
+- 桌面上的旧存档副本（TL_TCB、TL_Hand、TL_back、顶层 TL_Dobot / TL_Handback、灵巧手机械臂）。
+
+【重要提醒】
+- 示教数据（basket_aruco.yaml、fork_basket_teach.yaml）和手眼标定文件
+  （handeye_best.yaml）存在 Nano 板上（~/tl_mock_pick_place、~/tl_fork_teach、
+  ~/tl_handeye_data），不在本备份里；Nano 端数据备份命令见《手册》第 9 章。
+- 使用：把文件夹拷回电脑 / Nano 后，脚本在各自 scripts\ 目录下用 bash 运行；
+  日常跑脚本不需要编译（只有驱动包需要 colcon build）。

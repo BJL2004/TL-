@@ -1,0 +1,27 @@
+roh_hand_node:
+  ros__parameters:
+    enabled_on_start: false
+    limits_verified: false
+    apply_protection_profile: true
+    service_timeout_sec: 2.0
+    poll_period_sec: 0.25
+    motion_timeout_sec: 8.0
+    communication_fault_limit: 3
+    master_id: 1
+    slave_id: 2
+    rtu_port: 2
+    baudrate: 115200
+    data_bit: 8
+    stop_bit: 1
+    check_bit: "N"
+    open_position: [0, 0, 0, 0, 0, 0]
+    grasp_position: [32000, 32000, 32000, 32000, 32000, 22000]
+    speed: [8000, 8000, 8000, 8000, 8000, 6000]
+    current_limit_ma: [350, 350, 350, 350, 350, 300]
+    force_limit_mn: [2000, 2000, 2000, 2000, 2000]
+    stall_speed: [16, 16, 16, 16, 16, 16]
+    stall_current_ma: [200, 200, 200, 200, 200, 180]
+    stop_after_period_ms: [300, 300, 300, 300, 300, 300]
+    retry_after_period_ms: [1000, 1000, 1000, 1000, 1000, 1000]
+    fault_release_ratio: 0.15
+    active_contact_fingers: [0, 1, 2, 3, 4]
