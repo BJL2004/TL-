@@ -1,0 +1,4 @@
+1.本月封装完成tl_teleop（VR遥操作）
+2.tl_moveit2_config(可通过moveit控制机械臂运动)功能包
+3.完善URDF模型更新在_description功能包中，已通过moveit验证
+4.新增功能包tl_teleop_f710（F710手柄遥操作），待验证
