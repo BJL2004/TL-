@@ -1,0 +1,53 @@
+/**:
+  ros__parameters:
+    # ========== 控制频率 ==========
+    control_rate: 250.0              # 控制循环频率 (Hz)
+
+    # ========== 机械臂型号 ==========
+    arm_type: tcb710
+
+    # ========== 运动速度（0-100，对应机械臂实际速度范围）==========
+    speed_default: 50.0             # 默认运动速度
+    speed_min: 5.0                  # 最小速度
+    speed_max: 100.0                # 最大速度
+    speed_step: 5.0                 # 十字键每按一次速度变化量
+
+    # ========== 运动灵敏度 ==========
+    pos_sensitivity: 160.0           # 位置灵敏度 (mm/s，速度=100 时)
+    rot_sensitivity: 1.0            # 姿态灵敏度 (rad/s，速度=100 时)
+    step_size: 5.0                  # servol 插值步长 (mm)
+
+    # ========== ServoJ 初始化参数 ==========
+    servo_speed: 25.0               # ServoJ 运动速度
+    servo_vmax: 300.0                # ServoJ 各轴最大速度 (°/s)
+    servo_amax: 3000.0              # ServoJ 各轴最大加速度 (°/s²)
+    servo_jmax: 50000.0             # ServoJ 各轴最大加加速度 (°/s³)
+
+    # ========== 摇杆死区 ==========
+    deadzone: 0.15                  # 摇杆死区，小于此值忽略
+
+    # ========== 初始目标位姿 ==========
+    # 7 轴 TCB710： [x(mm), y(mm), z(mm), rx(rad), ry(rad), rz(rad)]
+    home_joints: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+    # ========== F710 轴映射 (DirectInput 模式，开关拨到 "D") ==========
+    # 注意：所有轴的值范围均是 [-1.0, 1.0]
+    axis_left_x: 1                  # 左摇杆 X
+    axis_left_y: 0                  # 左摇杆 Y
+    axis_right_x: 2                 # 右摇杆 X
+    axis_right_y: 3                 # 右摇杆 Y
+    axis_dpad_x: 4                  # 十字键 X
+    axis_dpad_y: 5                  # 十字键 Y
+
+    # ========== F710 按键映射 (DirectInput 模式) ==========
+    # 注意：所有按键均是数字开关 (0 或 1)，0 表示未按下，1 表示按下
+    btn_x: 0                        # X 键
+    btn_a: 1                        # A 键
+    btn_b: 2                        # B 键
+    btn_y: 3                        # Y 键
+    btn_lb: 4                       # LB 键
+    btn_rb: 5                       # RB 键
+    btn_lt: 6                       # LT 键 
+    btn_rt: 7                       # RT 键 
+    btn_back: 8                     # Back 键
+    btn_start: 9                    # Start 键
