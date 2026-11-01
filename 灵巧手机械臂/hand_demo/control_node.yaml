@@ -1,0 +1,67 @@
+control_node:
+  ros__parameters:
+    robot_ip: "192.168.1.13"
+    robot_port: "6001"
+    camera_object_topic: "/tl_vision/object_3d_pos_camera"
+    base_frame_id: "base_link"
+    object_type: "block"
+    grasp_offset: 0.40   #m
+    grasp_depth: 0.05    #m
+    approach_movetype: "MOVJ"
+    # ModbusRTU 参数（夹爪控制）
+    modbus_master_id: 1
+    modbus_rtu_port: 2
+    modbus_rtu_baudrate: 115200
+    modbus_rtu_slave_id: 2
+    modbus_rtu_data_bit: 8
+    modbus_rtu_stop_bit: 1
+    modbus_rtu_check_bit: "None"
+    modbus_gripper_addrs: [1135,1136,1137,1138,1139,1140]
+    modbus_gripper_close_val: [21000,20000,23000,60000,60000,60000] 
+    modbus_gripper_open_val: [0,0,0,60000,60000,60000] 
+    # Z 轴最低位置限制（mm，防止碰撞）
+    z_min_limit: 30.0
+    # 抓取目标 Z（mm，按 h 后下降到的位置）
+    grasp_target_z: 160.0
+    # 抓取过渡 Z（mm），先降到这个高度再降到 grasp_target_z
+    grasp_approach_z: 200.0
+    # 工具坐标系参数（夹爪抓取点相对于法兰盘的偏移）
+    tool_num: 1
+    tool_user_num: 0
+    tool_x: -30.0    # mm，tool_x 变大 对直角坐标系x up z down，夹爪
+    tool_y: 20.0     # mm，tool_y 变大没有影响
+    tool_z: 130.0    # mm，tool_z变大 x down z up，夹爪
+    # 下降时 Y 方向手动补偿（mm，因姿态变化导致夹爪偏移，正值为+ Y方向）
+    descend_y_offset: 33.0
+    # 第6轴角度补偿（最终 yaw = detected_angle × angle_scale + angle_offset）
+    angle_scale: 1.0               # 角度缩放系数
+    angle_offset: 0.0              # 角度偏移（弧度）
+    # ServoJ 参数
+    servoj_interp_points: 500     # 平滑总点数（100Hz=5秒，给机器人足够时间运动到位）
+    servoj_arrival_threshold: 0.5    # ServoJ 到位判定阈值（度）
+    servoj_vmax: [10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]  # °/s（提高速度让运动更流畅）
+    servoj_amax: [3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0]   # °/s²
+    servoj_jmax: [50000.0, 50000.0, 50000.0, 50000.0, 50000.0, 50000.0, 50000.0]  # °/s³
+    zero_joint: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    handeye_matrix:
+      [
+        -0.0132118966, -0.9996500265,  0.0229187749,  0.0769026017,
+         0.9997449355, -0.0127863345,  0.0186164859, -0.0398606653,
+        -0.0183169235,  0.0231588882,  0.9995639830,  0.0087168548,
+         0.0,           0.0,           0.0,           1.0
+      ]
+    # 自动循环模式：true 时自动执行 回零→检测→抓取→回零→... 直到检测不到物体
+    auto_loop_enabled: true
+    # 抓取时间参数（秒）
+    gripper_open_delay: 0.5    # 张开夹爪后等待
+    gripper_close_delay: 4.0  # 闭合夹爪后等待
+    pre_waypoint_delay: 1.0    # 抓取完成到经过点位
+    post_waypoint_delay: 4.0   # 到达放下点后张开夹爪等待
+    # 抓取后依次到达的笛卡尔点位（xyz mm + rpy rad），每6个值为一个点位
+    # 格式: [x1, y1, z1, r1, p1, y1, x2, y2, z2, r2, p2, y2, ...]
+    after_grasp_waypoints: [
+      507.9, -20.5, 245.6, 3.12, 0.9, 0.0,    # 抬起点
+      442.9, 248.5, 245.6, -2.6, 0.6, -0.7,   # 过渡点
+      366.2, 244.7, 152.6, -2.6, 0.6, -0.7,   # 放下点
+      366.2, 244.7, 180.6, -2.6, 0.6, -0.7    # 过渡点2
+    ]
